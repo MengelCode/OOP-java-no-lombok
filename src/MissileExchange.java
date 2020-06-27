@@ -11,15 +11,7 @@ Assignment: Term Project
  */
 
 /* Portions of the code in this project came from a program file "SpaceInvader.java" written by
- * Dr. Hong Sung, professor of Computer Science at the University of Central Oklahoma.
- * Dr. Sung made the "SpaceInvader.java" file available to me.  There are sections of code
- * that were directly copied from the file "SpaceInvader.java" that Dr. Sung wrote.  I have made
- * changes to some of the sections of copied code and I added code of
- * my own.  I give credit to Dr. Sung for writing "SpaceInvader.java", a program file containing code
- * which I have used to make this game, "Missile Exchange".  I give credit to Dr. Sung for
- * teaching me object-oriented programming design concepts that I have used to make this game.
- * It would not have been possible for me to make this program if he had not taught me those concepts.
- */
+ * Dr. Hong Sung, professor of Computer Science at the University of Central Oklahoma. */
 
 import java.awt.*;
 import javax.swing.*;
@@ -30,48 +22,48 @@ import javax.swing.JPanel;
 public class MissileExchange extends JFrame implements KeyListener {
 
     public static void main(String[] args) {
-	JFrame frame = new MissileExchange();
-	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	frame.setVisible(true);
+    	JFrame frame = new MissileExchange();
+    	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    	frame.setVisible(true);
     }	//end method main
 
     public MissileExchange() {
-	explosionAnimation = new ArrayList<Image>();
+    	explosionAnimation = new ArrayList<Image>();
         explosions = new ArrayList<Explosion>();
         gameItems = new java.util.ArrayList<GameItem>();
-	ufos = new java.util.ArrayList<Destroyable>();
-	pressedNukes = new java.util.ArrayList<Nuke>();
-	pressedHumanMissiles = new java.util.ArrayList<Missile>();
-	typedHumanMissiles = new java.util.ArrayList<Missile>();
+        ufos = new java.util.ArrayList<Destroyable>();
+        pressedNukes = new java.util.ArrayList<Nuke>();
+        pressedHumanMissiles = new java.util.ArrayList<Missile>();
+        typedHumanMissiles = new java.util.ArrayList<Missile>();
         endGameScreen = new JFrame();
 
         getImages();
 	
         explosionAnimation.add(fireball1Picture);
-	explosionAnimation.add(fireball2Picture);
-	explosionAnimation.add(fireball3Picture);
-	explosionAnimation.add(fireball4Picture);
-	explosionAnimation.add(fireball5Picture);
+        explosionAnimation.add(fireball2Picture);
+        explosionAnimation.add(fireball3Picture);
+        explosionAnimation.add(fireball4Picture);
+        explosionAnimation.add(fireball5Picture);
 
-	setUndecorated(true);
+        setUndecorated(true);
         setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 
         drawPanel = new DrawPanel();
-	drawPanel.setFocusable(true); // receives keyboard data
+        drawPanel.setFocusable(true); // receives keyboard data
         drawPanel.addKeyListener(this);
 
-	Container contentPane = getContentPane();
-	contentPane.add(drawPanel, "Center");
+        Container contentPane = getContentPane();
+        contentPane.add(drawPanel, "Center");
 
-	human = new Humanship(230, 465, 60, 20, false, HUMAN_SPACESHIP_SPEED, humanshipPicture);
-	gameItems.add(human);
+        human = new Humanship(230, 465, 60, 20, false, HUMAN_SPACESHIP_SPEED, humanshipPicture);
+        gameItems.add(human);
 
         LevelStarter.startLevel();
 
         gameTimer.schedule(new Animate(), 0, 50);
-	gameTimer.schedule(new SpacebarTrafficLight(), 20, 333);
-	gameTimer.schedule(new VictoryChecker(), 35, 1000);
-	gameTimer.schedule(new UfoAttack(), 25, 1000);
+        gameTimer.schedule(new SpacebarTrafficLight(), 20, 333);
+        gameTimer.schedule(new VictoryChecker(), 35, 1000);
+        gameTimer.schedule(new UfoAttack(), 25, 1000);
     } //end default constructor    
 
     public void getImages(){
@@ -86,193 +78,193 @@ public class MissileExchange extends JFrame implements KeyListener {
         fireball3Picture = new ImageIcon("ProjectPictures4-18\\fireball3.png").getImage();
         fireball4Picture = new ImageIcon("ProjectPictures4-18\\fireball4.png").getImage();
         fireball5Picture = new ImageIcon("ProjectPictures4-18\\fireball5.png").getImage();
-	nukePicture = new ImageIcon("ProjectPictures4-18\\nuke.png").getImage();
+        nukePicture = new ImageIcon("ProjectPictures4-18\\nuke.png").getImage();
     }   //end method loadImages
 
     public static Image getExplosionImage(int pictureIndex) {
-	return explosionAnimation.get(pictureIndex);
+    	return explosionAnimation.get(pictureIndex);
     }	//end method getExplosionImage
 
     public void keyPressed(KeyEvent e) {
-	int keyCode = e.getKeyCode();
+    	int keyCode = e.getKeyCode();
 
-	if(keyCode == KeyEvent.VK_SPACE) {
-	    spacebarFrames++;
+    	if(keyCode == KeyEvent.VK_SPACE) {
+    		spacebarFrames++;
 
-	    if(spacebarFrames > 1) {
-		if(spacebarGate % 10 == 0){
-		    m = new Missile((int)(human.getX() + human.width / 2 - 4), 430, 5, 10, false, true, HUMAN_MISSILE_SPEED, missilePicture);
-		    pressedHumanMissiles.add(m);
-		}	//end if
-	    }	//end if
+    		if(spacebarFrames > 1) {
+    			if(spacebarGate % 10 == 0){
+    				m = new Missile((int)(human.getX() + human.width / 2 - 4), 430, 5, 10, false, true, HUMAN_MISSILE_SPEED, missilePicture);
+    				pressedHumanMissiles.add(m);
+    			}	//end if
+    		}	//end if
 
-	    spacebarGate++;
-	} else if(keyCode == KeyEvent.VK_0) {
-	    n = new Nuke((int)(human.getX() + human.width / 2 - 4), 430, 5, 10, false, true, HUMAN_MISSILE_SPEED, nukePicture);
-	    pressedNukes.add(n);
-	} else if(keyCode == KeyEvent.VK_LEFT) {
-	    human.travelingToLeft = true;
-	    human.update();
-	} else if(keyCode == KeyEvent.VK_RIGHT) {
-	    human.travelingToLeft = false;
-	    human.update();
-	}   //end if
+    		spacebarGate++;
+    	} else if(keyCode == KeyEvent.VK_0) {
+    		n = new Nuke((int)(human.getX() + human.width / 2 - 4), 430, 5, 10, false, true, HUMAN_MISSILE_SPEED, nukePicture);
+    		pressedNukes.add(n);
+    	} else if(keyCode == KeyEvent.VK_LEFT) {
+    		human.travelingToLeft = true;
+    		human.update();
+    	} else if(keyCode == KeyEvent.VK_RIGHT) {
+    		human.travelingToLeft = false;
+    		human.update();
+    	}   //end if
     }	//end method keyPressed
 
     public void keyReleased(KeyEvent e) {
-	if(spacebarFrames > 1) {
-	    spacebarGate = 0;
-	    System.out.println("frames > 1");
-	} else if(spacebarFrames == 1) {
-	    if(spacebarStop == true) {
-		m = new Missile((int)(human.getX() + human.width / 2 - 4), 430, 5, 10, false, true, HUMAN_MISSILE_SPEED, missilePicture);
-		pressedHumanMissiles.add(m);
-		spacebarStop = false;
-	    }	//end if
-	}   //end if
-
-	spacebarFrames = 0;
+		if(spacebarFrames > 1) {
+		    spacebarGate = 0;
+		    System.out.println("frames > 1");
+		} else if(spacebarFrames == 1) {
+		    if(spacebarStop == true) {
+			m = new Missile((int)(human.getX() + human.width / 2 - 4), 430, 5, 10, false, true, HUMAN_MISSILE_SPEED, missilePicture);
+			pressedHumanMissiles.add(m);
+			spacebarStop = false;
+		    }	//end if
+		}   //end if
+	
+		spacebarFrames = 0;
     }	//end method keyReleased
 
     public void keyTyped(KeyEvent e) {}
 
     private class Animate extends java.util.TimerTask {
-	public void run() {
-	    drawPanel.repaint();
-	}   //end method run
+		public void run() {
+		    drawPanel.repaint();
+		}   //end method run
     }	//end class Animate
 
     private class SpacebarTrafficLight extends java.util.TimerTask {
-	public void run() {
-	    spacebarStop = true;
-	}   //end method run
+		public void run() {
+		    spacebarStop = true;
+		}   //end method run
     }	//end class SpacebarTrafficLight
 
     private class UfoAttack extends java.util.TimerTask {
-	public void run() {
-	    if(MissileExchange.ufos.size() > 0){
-		for(int j = 0; j < 2; j++){
-		    selectedUFO = MissileExchange.ufos.get(generator.nextInt(MissileExchange.ufos.size()));
-		    s = (UFOSpaceship)(selectedUFO);
-		    s.fireMissile();
-		}   //end for
-	    }	//end if    
-	}   //end method run
+		public void run() {
+		    if(MissileExchange.ufos.size() > 0){
+				for(int j = 0; j < 2; j++){
+				    selectedUFO = MissileExchange.ufos.get(generator.nextInt(MissileExchange.ufos.size()));
+				    s = (UFOSpaceship)(selectedUFO);
+				    s.fireMissile();
+				}   //end for
+		    }	//end if    
+		}   //end method run
     }	//end class UfoAttack
 
     private class VictoryChecker extends java.util.TimerTask {
-	public void run() {
-	    if(humanLives > 0){
-		if(MissileExchange.regenerateHumanship == true) {
-		    MissileExchange.regenerateHumanship = false;
-
-		    System.out.println(MissileExchange.humanLives + " lives remaining");
-		    MissileExchange.human = new Humanship(230, 465, 60, 20, false, HUMAN_SPACESHIP_SPEED, humanshipPicture);
-		    gameItems.add(human);
-		}	//end if
-	    }	//end if
-	    
-	    if(humanLives <= 0) {
-		
-		gameTimer.cancel();
-		explosionTimer.cancel();
-		levelTimer.cancel();
-	    } else if(victory == true) {
-		gameTimer.cancel();
-		explosionTimer.cancel();
-		levelTimer.cancel();
-	    }	//end if
-
-	    if(switchingLevels == true) {
-		LevelStarter.startLevel();
-		switchingLevels = false;
-	    }	//end if
-	}	//end method run
+		public void run() {
+		    if(humanLives > 0){
+		    	if(MissileExchange.regenerateHumanship == true) {
+		    		MissileExchange.regenerateHumanship = false;
+	
+		    		System.out.println(MissileExchange.humanLives + " lives remaining");
+		    		MissileExchange.human = new Humanship(230, 465, 60, 20, false, HUMAN_SPACESHIP_SPEED, humanshipPicture);
+		    		gameItems.add(human);
+		    	}	//end if
+		    }	//end if
+		    
+		    if(humanLives <= 0) {
+			
+		    	gameTimer.cancel();
+		    	explosionTimer.cancel();
+		    	levelTimer.cancel();
+		    } else if(victory == true) {
+		    	gameTimer.cancel();
+		    	explosionTimer.cancel();
+		    	levelTimer.cancel();
+		    }	//end if
+	
+		    if(switchingLevels == true) {
+		    	LevelStarter.startLevel();
+		    	switchingLevels = false;
+		    }	//end if
+		}	//end method run
     }	//end class Animate
 
-private class DrawPanel extends JPanel {
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-	Graphics2D g2 = (Graphics2D) g;
-
-	while(GameItem.explosionsWaiting > 0){
-	    MissileExchange.gameItems.add(Missile.explosionsToAdd[GameItem.explosionsWaiting - 1]);
-	    System.out.println("explosion added");
-	    GameItem.explosionsWaiting--;
-	}   //end while
-
-	for(int w = 0; w < MissileExchange.pressedHumanMissiles.size(); w++) {
-	    Missile a = MissileExchange.pressedHumanMissiles.get(w);
-
-	    if(a == null){
-		System.out.println("null");
-		continue;}
-	    //end if
-
-	    MissileExchange.gameItems.add(a);
-	    MissileExchange.pressedHumanMissiles.remove(a);
-	}   //end for
-
-	for(int w = 0; w < MissileExchange.pressedNukes.size(); w++) {
-	    Nuke a = MissileExchange.pressedNukes.get(w);
-
-	    if(a == null){
-		System.out.println("null");
-		continue;}
-	    //end if
-
-	    MissileExchange.gameItems.add(a);
-	    MissileExchange.pressedNukes.remove(a);
-	}   //end for
-
-	g2.drawImage(MissileExchange.outerspacePicture, 0, 0, null);
-
-	for (int i = 0; i < MissileExchange.gameItems.size(); i++) {
-	    GameItem s = MissileExchange.gameItems.get(i);
-
-	    if(s == null){
-		System.out.println("null");
-		continue;}
-	    //end if
-
-	     if(s instanceof UFOSpaceship) {
-		 UFOSpaceship u = (UFOSpaceship)(s);
-		 u.update();
-	     }	//end if
-
-	     if(s instanceof Missile) {
-		 GameItem q = (GameItem)(s);
-		 q.translateVertically();
-		 //end if
-	     }	//end if
-
-	    if (s.isOutOfWindow()) {
-		if(s instanceof UFOSpaceship){
-		    if(s.travelingToLeft == false)
-			s.travelingToLeft = true;
-		    else s.travelingToLeft = false;
-		}	//end if
-
-		if(s instanceof Missile){
-		    MissileExchange.gameItems.remove(s);
-		}	//end if
-	    }   //end if
-
-	    imageX = (int)s.x;
-	    imageY = (int)s.y;
-
-	    g2.drawImage(s.itemImage, imageX, imageY, null);
-	    //g2.draw(s);
-
-            if(s instanceof Explosion){
-                MissileExchange.explosionTimer.schedule(new ExplosionTask(s.x, s.y, g2), 0, 50);
-		MissileExchange.gameItems.remove(i);
-            }   //end if
-	}   //end for
-    }   //end method paintComponent
-    int imageX = 0;
-    int imageY = 0;
-} //end class DrawPanel
+    private class DrawPanel extends JPanel {
+	    public void paintComponent(Graphics g) {
+	        super.paintComponent(g);
+			Graphics2D g2 = (Graphics2D) g;
+		
+			while(GameItem.explosionsWaiting > 0){
+			    MissileExchange.gameItems.add(Missile.explosionsToAdd[GameItem.explosionsWaiting - 1]);
+			    System.out.println("explosion added");
+			    GameItem.explosionsWaiting--;
+			}   //end while
+		
+			for(int w = 0; w < MissileExchange.pressedHumanMissiles.size(); w++) {
+			    Missile a = MissileExchange.pressedHumanMissiles.get(w);
+		
+			    if(a == null){
+					System.out.println("null");
+					continue;
+				} //end if
+		
+			    MissileExchange.gameItems.add(a);
+			    MissileExchange.pressedHumanMissiles.remove(a);
+			}   //end for
+		
+			for(int w = 0; w < MissileExchange.pressedNukes.size(); w++) {
+			    Nuke a = MissileExchange.pressedNukes.get(w);
+		
+			    if(a == null){
+			    	System.out.println("null");
+			    	continue;
+			    } //end if
+		
+			    MissileExchange.gameItems.add(a);
+			    MissileExchange.pressedNukes.remove(a);
+			}   //end for
+		
+			g2.drawImage(MissileExchange.outerspacePicture, 0, 0, null);
+		
+			for (int i = 0; i < MissileExchange.gameItems.size(); i++) {
+			    GameItem s = MissileExchange.gameItems.get(i);
+		
+			    if(s == null){
+			    	System.out.println("null");
+			    	continue;
+				} //end if
+		
+			     if(s instanceof UFOSpaceship) {
+			    	 UFOSpaceship u = (UFOSpaceship)(s);
+			    	 u.update();
+			     }	//end if
+		
+			     if(s instanceof Missile) {
+			    	 GameItem q = (GameItem)(s);
+			    	 q.translateVertically();
+				 }	//end if
+		
+			    if (s.isOutOfWindow()) {
+					if(s instanceof UFOSpaceship){
+					    if(s.travelingToLeft == false)
+						s.travelingToLeft = true;
+					    else s.travelingToLeft = false;
+					}	//end if
+		
+					if(s instanceof Missile){
+					    MissileExchange.gameItems.remove(s);
+					}	//end if
+			    }   //end if
+		
+			    imageX = (int)s.x;
+			    imageY = (int)s.y;
+		
+			    g2.drawImage(s.itemImage, imageX, imageY, null);
+			    //g2.draw(s);
+		
+	            if(s instanceof Explosion){
+	                MissileExchange.explosionTimer.schedule(new ExplosionTask(s.x, s.y, g2), 0, 50);
+	                MissileExchange.gameItems.remove(i);
+	            }   //end if
+			}   //end for
+	    }   //end method paintComponent
+	    
+	    int imageX = 0;
+	    int imageY = 0;
+    } //end class DrawPanel
 
     public static java.util.ArrayList<GameItem> gameItems;
     public static java.util.ArrayList<Missile> pressedHumanMissiles;
