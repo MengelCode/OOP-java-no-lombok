@@ -16,23 +16,55 @@ Assignment: Term Project
 import java.awt.Graphics2D;
 
 public class ExplosionTask extends java.util.TimerTask {
-    public ExplosionTask(double x, double y, Graphics2D g2){
+	private int explosionPicture = 0;
+    private double x;
+    private double y;
+    private Graphics2D g2;
+	
+    public int getExplosionPicture() {
+		return explosionPicture;
+	}
+
+	public void setExplosionPicture(int explosionPicture) {
+		this.explosionPicture = explosionPicture;
+	}
+
+	public double getX() {
+		return x;
+	}
+
+	public void setX(double x) {
+		this.x = x;
+	}
+
+	public double getY() {
+		return y;
+	}
+
+	public void setY(double y) {
+		this.y = y;
+	}
+
+	public Graphics2D getG2() {
+		return g2;
+	}
+
+	public void setG2(Graphics2D g2) {
+		this.g2 = g2;
+	}
+    
+	public ExplosionTask(double x, double y, Graphics2D g2){
         this.x = x;
         this.y = y;
         this.g2 = g2;
     }
     
     public void run() {
-        g2.drawImage(MissileExchange.explosionAnimation.get(explosionPicture), (int)x, (int)y, null);
+        g2.drawImage(MissileExchange.getExplosionAnimation().get(explosionPicture), (int)x, (int)y, null);
 		explosionPicture++;
 		
 		if(explosionPicture >= 5) {
 	            this.cancel();
 		}    //end if
     }   //end method run
-    
-    private int explosionPicture = 0;
-    private double x;
-    private double y;
-    private Graphics2D g2;
 }   //end class ExplosionTask

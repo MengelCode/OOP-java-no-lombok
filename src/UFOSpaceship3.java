@@ -19,17 +19,17 @@ public class UFOSpaceship3 extends UFOSpaceship implements Destroyable {
     public UFOSpaceship3(int x, int y, int w, int h, boolean travelingToLeft, Image itemImage, double missileSpeed, Image missileImage) {
 		super(x, y, w, h, travelingToLeft, missileSpeed, missileImage);
 		width = w;
-		this.travelingToLeft = travelingToLeft;
-		this.itemImage = itemImage;
-		this.speed = UFO_SPACESHIP3_SPEED_MULTIPLICAND * ufoSpeedMultiplier;
-		this.healthPoints += 2;
+		this.setTravelingToLeft(travelingToLeft);
+		this.setItemImage(itemImage);
+		this.setSpeed(UFO_SPACESHIP3_SPEED_MULTIPLICAND * getUfoSpeedMultiplier());
+		this.setHealthPoints(getHealthPoints() + 2);
     }   //end constructor
 
     public void update() {
-		if(travelingToLeft == false)
-		    setFrame(getX() + speed, getY(), getWidth(), getHeight());
+		if(isTravelingToLeft() == false)
+		    setFrame(getX() + getSpeed(), getY(), getWidth(), getHeight());
 		else
-		    setFrame(getX() - speed, getY(), getWidth(), getHeight());
+		    setFrame(getX() - getSpeed(), getY(), getWidth(), getHeight());
 	}   //end method update
     
     public static final double UFO_SPACESHIP3_SPEED_MULTIPLICAND = 1.8;

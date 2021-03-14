@@ -17,16 +17,20 @@ Assignment: Term Project
  * Dr. Hong Sung, professor of Computer Science at the University of Central Oklahoma. */
 
  public class Missile extends GameWeapon {
-    public Missile(int x, int y, int w, int h,boolean travelingToLeft, boolean humanMissile, double missileSpeed, Image itemImage) {
+	private boolean humanMissile;
+	 
+    public void setHumanMissile(boolean humanMissile) {
+		this.humanMissile = humanMissile;
+	}
+
+	public Missile(int x, int y, int w, int h,boolean travelingToLeft, boolean humanMissile, double missileSpeed, Image itemImage) {
 		super(x, y, w, h, travelingToLeft, missileSpeed);
 		this.humanMissile = humanMissile;
-		this.itemImage = itemImage;
-		this.missileSpeed = missileSpeed;
+		this.setItemImage(itemImage);
+		this.setMissileSpeed(missileSpeed);
     }	//end constructor
 
     public boolean isHumanMissile() {
     	return humanMissile;
-    }	//end method setMissileSpeed
-   
-    private boolean humanMissile;
+    }	//end method isHumanMissile
 }	//end class Missile

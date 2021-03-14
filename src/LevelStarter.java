@@ -14,49 +14,49 @@ Assignment: Term Project
  * Dr. Hong Sung, professor of Computer Science at the University of Central Oklahoma. */
 
 public class LevelStarter {
+    private static final int LEVEL1_UFO_SPACESHIP_SPEED_MULTIPLIER = 8;
+    private static final int LEVEL2_UFO_SPACESHIP_SPEED_MULTIPLIER = 9;
+    private static final int LEVEL3_UFO_SPACESHIP_SPEED_MULTIPLIER = 10;
+    private static final int LEVEL4_UFO_SPACESHIP_SPEED_MULTIPLIER = 11;
+    private static final int LEVEL5_UFO_SPACESHIP_SPEED_MULTIPLIER = 12;
+    
     public static void startLevel(){
-		if(MissileExchange.numberOfUFOSOnScreen <= 0){
-			MissileExchange.switchingLevels = false;
+		if ( MissileExchange.getNumberOfUFOSOnScreen() <= 0 ) {
+			MissileExchange.setSwitchingLevels(false); //In process of switching levels, no need to switch again
 	
-			switch(MissileExchange.currentLevel){
-			    case 1:
-					System.out.println("before setting speed multiplier");
-					UFOSpaceship.ufoSpeedMultiplier = LEVEL1_UFO_SPACESHIP_SPEED_MULTIPLIER;
-					System.out.println("***** Level 1 starting, ufoSpaceshipSpeedMultiplier *****");
-					MissileExchange.l1 = new Level1();
-					MissileExchange.levelTimer.schedule(MissileExchange.l1, 0, 3000);
+			switch ( MissileExchange.getCurrentLevel() ){
+			    case 1: //level 1
+					//System.out.println("before setting speed multiplier");
+					UFOSpaceship.setUfoSpeedMultiplier(LEVEL1_UFO_SPACESHIP_SPEED_MULTIPLIER);
+					//System.out.println("***** Level 1 starting, ufoSpaceshipSpeedMultiplier *****");
+					MissileExchange.setLevel1(new Level1());
+					MissileExchange.getLevelTimer().schedule(MissileExchange.getLevel1(), 0, 3000);
 					break;
-			    case 2:
-					UFOSpaceship.ufoSpeedMultiplier = LEVEL2_UFO_SPACESHIP_SPEED_MULTIPLIER;
-					System.out.println("***** Level 2 starting, ufoSpaceshipSpeedMultiplier *****");
-					MissileExchange.l2 = new Level2();
-					MissileExchange.levelTimer.schedule(MissileExchange.l2, 0, 3000);
+			    case 2: //level 2
+					UFOSpaceship.setUfoSpeedMultiplier(LEVEL2_UFO_SPACESHIP_SPEED_MULTIPLIER);
+					//System.out.println("***** Level 2 starting, ufoSpaceshipSpeedMultiplier *****");
+					MissileExchange.setLevel2(new Level2());
+					MissileExchange.getLevelTimer().schedule(MissileExchange.getLevel2(), 0, 3000);
 					break;
 			    case 3:
-					UFOSpaceship.ufoSpeedMultiplier = LEVEL3_UFO_SPACESHIP_SPEED_MULTIPLIER;
-					System.out.println("***** Level 3 starting, ufoSpaceshipSpeedMultiplier *****");
-					MissileExchange.l3 = new Level3();
-					MissileExchange.levelTimer.schedule(MissileExchange.l3, 0, 3000);
+					UFOSpaceship.setUfoSpeedMultiplier(LEVEL3_UFO_SPACESHIP_SPEED_MULTIPLIER);
+					//System.out.println("***** Level 3 starting, ufoSpaceshipSpeedMultiplier *****");
+					MissileExchange.setLevel3(new Level3());
+					MissileExchange.getLevelTimer().schedule(MissileExchange.getLevel3(), 0, 3000);
 					break;
 			    case 4:
-					UFOSpaceship.ufoSpeedMultiplier = LEVEL4_UFO_SPACESHIP_SPEED_MULTIPLIER;
-					System.out.println("***** Level 4 starting, ufoSpaceshipSpeedMultiplier *****");
-					MissileExchange.l4 = new Level4();
-					MissileExchange.levelTimer.schedule(MissileExchange.l4, 0, 3000);
+					UFOSpaceship.setUfoSpeedMultiplier(LEVEL4_UFO_SPACESHIP_SPEED_MULTIPLIER);
+					//System.out.println("***** Level 4 starting, ufoSpaceshipSpeedMultiplier *****");
+					MissileExchange.setLevel4(new Level4());
+					MissileExchange.getLevelTimer().schedule(MissileExchange.getLevel4(), 0, 3000);
 					break;
 			    case 5:
-					UFOSpaceship.ufoSpeedMultiplier = LEVEL5_UFO_SPACESHIP_SPEED_MULTIPLIER;
-					System.out.println("***** Level 5 starting *****");
-					MissileExchange.l5 = new Level5();
-					MissileExchange.levelTimer.schedule(MissileExchange.l5, 0, 3000);
+					UFOSpaceship.setUfoSpeedMultiplier(LEVEL5_UFO_SPACESHIP_SPEED_MULTIPLIER);
+					//System.out.println("***** Level 5 starting *****");
+					MissileExchange.setLevel5(new Level5());
+					MissileExchange.getLevelTimer().schedule(MissileExchange.getLevel5(), 0, 3000);
 					break;
 			}   //end switch
 		}   //end if
-    }   //end method run
-    
-    public static final int LEVEL1_UFO_SPACESHIP_SPEED_MULTIPLIER = 8;
-    public static final int LEVEL2_UFO_SPACESHIP_SPEED_MULTIPLIER = 9;
-    public static final int LEVEL3_UFO_SPACESHIP_SPEED_MULTIPLIER = 10;
-    public static final int LEVEL4_UFO_SPACESHIP_SPEED_MULTIPLIER = 11;
-    public static final int LEVEL5_UFO_SPACESHIP_SPEED_MULTIPLIER = 12;
-}   //end class LevelScheduler
+    }   //end method startLevel
+}   //end class LevelStarter

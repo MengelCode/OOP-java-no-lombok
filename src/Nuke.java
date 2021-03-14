@@ -19,7 +19,7 @@ Assignment: Term Project
 public class Nuke extends GameWeapon{
     public Nuke(int x, int y, int w, int h,boolean travelingToLeft, boolean humanMissile, double missileSpeed, Image itemImage) {
 		super(x, y, w, h, travelingToLeft, missileSpeed);
-		this.itemImage = itemImage;
-		this.missileSpeed = missileSpeed;
+		this.setItemImage(itemImage);
+		this.setMissileSpeed(missileSpeed);
     }	//end constructor
 }   //end class Nuke

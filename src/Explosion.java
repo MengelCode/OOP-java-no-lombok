@@ -16,15 +16,16 @@ Assignment: Term Project
 import java.awt.*;
 
 public class Explosion extends GameItem {
+	private int animationPictureIndex;
+	
 	public Explosion(int x, int y, int w, int h, boolean travelingToLeft){
 	    super(x, y, w, h, travelingToLeft, 0.0);
 	    animationPictureIndex = 0;
-	    this.itemImage = MissileExchange.fireball2Picture;
+	    this.setItemImage(MissileExchange.getFireball2Picture());
 	}   //end default constructor
 
 	public synchronized void update(){
-	    itemImage = MissileExchange.getExplosionImage(animationPictureIndex);
+	    setItemImage(MissileExchange.getExplosionImage(animationPictureIndex));
 	    animationPictureIndex++;
 	}   //end method update
-	private int animationPictureIndex;
-    }	//end class Explosion
+}	//end class Explosion

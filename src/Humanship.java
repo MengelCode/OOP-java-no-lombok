@@ -16,19 +16,31 @@ Assignment: Term Project
  * Dr. Hong Sung, professor of Computer Science at the University of Central Oklahoma. */
 
 public class Humanship extends Spaceship implements Destroyable{
-    public Humanship(int x, int y, int width, int height, boolean travelingToLeft, int shipSpeed, Image itemImage) {
+	private final int LEFT_BOUND = 0;
+    private final int RIGHT_BOUND = 500;
+    private double shipSpeed = 0.0;
+	
+    public double getShipSpeed() {
+		return shipSpeed;
+	}
+
+	public void setShipSpeed(double shipSpeed) {
+		this.shipSpeed = shipSpeed;
+	}
+    
+	public Humanship(int x, int y, int width, int height, boolean travelingToLeft, int shipSpeed, Image itemImage) {
 		super(x, y, width, height, false);
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.height = height;
-		this.travelingToLeft = travelingToLeft;
-		this.itemImage = itemImage;
+		this.setTravelingToLeft(travelingToLeft);
+		this.setItemImage(itemImage);
 		this.shipSpeed = shipSpeed;
     }   //end constructor
 
     public synchronized void update() {
-		if(travelingToLeft == false){
+		if(isTravelingToLeft() == false){
 		    if(x + width > RIGHT_BOUND) return;
 		    setFrame(x + shipSpeed, getY(), width, height);
 		} else{
@@ -38,12 +50,8 @@ public class Humanship extends Spaceship implements Destroyable{
     }   //end method update
 
     public void getDestroyed() {
-		MissileExchange.gameItems.remove(this);
-		MissileExchange.humanLives--;
-		MissileExchange.regenerateHumanship = true;
+		MissileExchange.getGameItems().remove(this);
+		MissileExchange.setHumanLives(MissileExchange.getHumanLives() - 1);
+		MissileExchange.setRegenerateHumanship(true);
     }   //end method getDestroyed
-    
-    private final int LEFT_BOUND = 0;
-    private final int RIGHT_BOUND = 500;
-    private double shipSpeed = 0.0;
 }   //end class Humanship
